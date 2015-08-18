@@ -6,6 +6,9 @@ var myPerson = {
 	profession: 'QA',
 	language: 'JavaScript',
 	foodName: 'burger',
+	toString: function() {
+		console.log(JSON.stringify(myPerson));
+	},
 	sayHi: function() {
 		return 'Привет, меня зовут ' + this.name;
 	},
@@ -45,3 +48,5 @@ console.log(myPerson.name);
 console.log(myPerson.age);
 console.log(myPerson.sayHi());
 console.log(myPerson.eat.call(food));
+console.log(typeof(myPerson.eat));
+console.log(myPerson.toString());
