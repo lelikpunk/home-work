@@ -7,7 +7,7 @@ var myPerson = {
 	language: 'JavaScript',
 	foodName: 'burger',
 	toString: function() {
-		console.log(JSON.stringify(myPerson));
+		return (JSON.stringify(myPerson));
 	},
 	sayHi: function() {
 		return 'Привет, меня зовут ' + this.name;
