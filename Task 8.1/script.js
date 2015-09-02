@@ -59,9 +59,9 @@ var shapePrototype = {
         style.top = options.top || '0px';
         style.left = options.left || '0px';
 
-        style.width = options.width || '50px';
-        style.height = options.height || '50px';
-        style.background = options.color || 'green';
+        style.width = options.width || '100px';
+        style.height = options.height || '100px';
+        style.background = options.color || 'red';
         console.info('Initialize div');
         return this;
     }
@@ -70,10 +70,10 @@ function Circle (options) {
     var circle = Object.create(shapePrototype).init(options);
     return circle;
 }
-var r1 = Circle({
+var r1 = Circle ({
     top: '100px',
     left: '100px'
 });
 
 r1.render().run();
-r2.render().run('down');
+r1.render().run('down');

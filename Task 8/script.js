@@ -65,3 +65,28 @@ circle.move = rectangle.move = function move(where) {
       this.element.style.left = (parseInt(this.element.style.left, 10) + parseInt(this.element.style.width, 10)) + 'px';
   }
 };
+
+
+
+
+
+window.onload = function() {
+  circle.render();
+  rectangle.render();
+    setInterval(function() {
+        rectangle.move();
+        circle.move('down');
+    },5000);
+};
+
+// circle.render();
+// var left = circle.move();
+
+// for(var i = 0; i < 5; i++) {
+//     (function(e) {
+//         setTimeout(function() {
+//             var left = circle.move();
+//             left;
+//         }, 5000);
+//     })(i);
+// }
