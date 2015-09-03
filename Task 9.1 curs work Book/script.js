@@ -68,18 +68,12 @@ var bookApi = (function () {
 
             books.push(new Book('HTML Good Parts', 
                 'Rokfold', 300));
-            //1
-            
 
-            //2
             
-
             books.forEach(renderBook);
 
-            //3
             document.body.appendChild( ulObj );
 
-            //4
             var clickHandler = function clickHandler ( key ) {
                 books.sort(function (a, b) {
                     
@@ -108,7 +102,6 @@ var bookApi = (function () {
             createButton('Sort By Name', 'name', clickHandler);
             createButton('Sort By Page', 'pages', clickHandler);
 
-            //5
             var formBook = document.createElement('form');
 
             
