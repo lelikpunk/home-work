@@ -24,10 +24,13 @@
 	   		if (global === this) {
 		      return new simpleJSLibrary(id);
 		    }
-
-			  // Мы в верном контексте объекта(scope):
-	      		// Сохранить найденный элемент в свойство
 			  this.e = document.querySelectorAll(id);
+			  if (this.e.length > 1) {
+			  	console.log(this.e.length);
+			  }else{
+			  	this.e = document.querySelector(id);
+			  	console.log(this.e.length);
+			  }
 		    return this;
 	   	} else {
 	   		// Не указан параметр id - вернуть объект about
@@ -53,29 +56,45 @@
 		show: function () {
 		  // implementation
 		  if (this.e.__proto__.constructor.name == "NodeList") {
-		  	Array.prototype.forEach.call(this.e, function(e,i) { 
-		  		this.e[i].style.display = 'inherit';
-		  		console.log(e); 
+		  	Array.prototype.forEach.call(this.e, function(e) { 
+		  		e.style.display = 'inherit';
 		  	});
-		  	//this.e.style.display = 'inherit';
-		  } else {
+
+		  } else if (this.e.__proto__.constructor.name !== "NodeList") {
+		  	this.e.style.display = 'inherit';
+		  	
+		  }else{
 		  	showNodeElementError();
 		  }
 		  return this;
 		},
 		hide: function () {
 		  // implementation
-		  if (this.e) {
+		  if (this.e.__proto__.constructor.name == "NodeList") {
+		  	Array.prototype.forEach.call(this.e, function(e) { 
+		  		e.style.display = 'none';
+		  	});
+
+		  } else if (this.e.__proto__.constructor.name !== "NodeList") {
 		  	this.e.style.display = 'none';
-		  } else {
+		  	
+		  }else{
 		  	showNodeElementError();
 		  }
 		  return this;
-		}
+		},
 		/*TODO: 3. Реализовать метод toggle()
 			который будет вызывать то show(), то hide()
 			в зависимости от стиля элемента
 	  */
+
+	  	toggle: function () {
+	  		if (this.e.style.display == 'inherit') {
+	  		this.e.hide();
+	  		}else{
+	  		this.e.show();
+	  		}
+	  	}
 
 	  /*TODO: 4. Реализовать метод size(height, width)
 			который будет принимать два параметра
