@@ -8,10 +8,6 @@ var bookApi = (function () {
         this.pages = pages;
     }
 
-    function createSpan () {
-        var spanObj = document.createElement('span');
-    }
-
     function createButton (text, key, callback) {
         var button = document.createElement('button');
         button.innerHTML = text;

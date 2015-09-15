@@ -1,15 +1,10 @@
-var bookApi = (function () {
+var authorApi = (function(){
 
-    var books = [];
+    var authors = [];
     var ulObj = document.createElement('ul');
-    function Book (bookName, author, pages) {
-        this.name = bookName;
-        this.author = author;
-        this.pages = pages;
-    }
-
-    function createSpan () {
-        var spanObj = document.createElement('span');
+    function Author (name,lastname){
+        this.name = name;
+        this.lastname = lastname;
     }
 
     function createButton (text, key, callback) {
@@ -20,27 +15,24 @@ var bookApi = (function () {
         document.body.appendChild(button);
     }
 
-    function renderBook (element, index, array) {
+    function renderAuthor (element, index, array) {
         var liObj = document.createElement('li'),
             spanName = document.createElement('span'),
-            spanAuthor = document.createElement('span'),
-            spanPage = document.createElement('span'),
+            spanLastname = document.createElement('span'),
             removeButton = document.createElement('button');
-        spanName.innerHTML = element.name + ', ';
-        spanAuthor.innerHTML = element.author + ' - ';
-        spanPage.innerHTML = element.pages;
+        spanName.innerHTML = element.name + ' ';
+        spanLastname.innerHTML = element.lastname;
         removeButton.innerHTML = 'x';
-        removeButton.addEventListener('click', removeBook.bind(null, element, index, liObj));
+        removeButton.addEventListener('click', removeAuthor.bind(null, element, index, liObj));
         liObj.appendChild( spanName );
-        liObj.appendChild( spanAuthor );
-        liObj.appendChild( spanPage );
+        liObj.appendChild( spanLastname );
         liObj.appendChild( removeButton );
         ulObj.appendChild( liObj );
     }
 
-    function removeBook(book, index, bookLi) {
-        books.splice(books.indexOf(book), 1);
-        bookLi.parentNode.removeChild(bookLi);
+    function removeAuthor(author, index, authorLi) {
+        authors.splice(index, 1);
+        authorLi.parentNode.removeChild(authorLi);
     }
 
     function createInput(name, conteiner) {
@@ -53,35 +45,20 @@ var bookApi = (function () {
         return input;
     }
 
-    return {
-        getBooks: function getBooks() {
-            return books;
+    return{
+        getAuthors: function getAuthors(){
+            return authors;
         },
-        init: function init() {
+        init: function init(){
 
-            books.push(new Book('Java Many Parts', 
-                'Crok', 1000));
-            books.push(new Book('Javascript Good Parts', 
-                'Crokfold', 300));
-            books.push(new Book('PHP Bad Parts', 
-                'Fold', 500));
+            authors.push(new Author('Vasya', 'Petrov'));
 
-            books.push(new Book('HTML Good Parts', 
-                'Rokfold', 300));
-            //1
-            
+            authors.forEach(renderAuthor);
 
-            //2
-            
-
-            books.forEach(renderBook);
-
-            //3
             document.body.appendChild( ulObj );
 
-            //4
             var clickHandler = function clickHandler ( key ) {
-                books.sort(function (a, b) {
+                authors.sort(function (a, b) {
                     
                     var first = a[ key ],
                         second = b[ key ];
@@ -101,47 +78,49 @@ var bookApi = (function () {
 
                 ulObj.innerHTML = '';
                 
-                books.forEach(renderBook);
+                authors.forEach(renderAuthor);
             }
 
-            createButton('Sort By Author', 'author', clickHandler);
             createButton('Sort By Name', 'name', clickHandler);
-            createButton('Sort By Page', 'pages', clickHandler);
+            createButton('Sort By Lastname', 'lastname', clickHandler);
 
-            //5
-            var formBook = document.createElement('form');
 
-            
-            var nameInput = createInput('name', formBook);
-            var authorInput = createInput('author', formBook);
-            var pagesInput = createInput('pages', formBook);
+            var formAuthor = document.createElement('form');
 
-            var newBookButton = document.createElement('button');
-            newBookButton.innerHTML = 'Add book';
 
-            function reset() {
+            var nameInput = createInput('name', formAuthor);
+            var lastnameInput = createInput('lastname', formAuthor);
+
+
+            var newAuthorButton = document.createElement('button');
+            newAuthorButton.innerHTML = 'Add Author';
+
+            function reset(){
                 nameInput.value = '';
-                authorInput.value = '';
-                pagesInput.value = '';
+                lastnameInput.value = '';
             }
 
-            formBook.addEventListener('submit', function (event) {
-                var newBook = new Book(nameInput.value, authorInput.value, pagesInput.value);
-                renderBook(newBook);
-                books.push(newBook);
+            formAuthor.addEventListener('submit', function(event){
+                var newAuthor = new Author(nameInput.value, lastnameInput.value);
+                authors.push(newAuthor);
+
+                ulObj.innerHTML = '';
+                authors.forEach(renderAuthor);
 
                 reset();
 
                 event.preventDefault();
             });
 
-            formBook.appendChild(newBookButton);
-            document.body.appendChild(formBook);
+            formAuthor.appendChild(newAuthorButton);
+            document.body.appendChild(formAuthor);
         }
-    }   
+    }
+
 })();
 
-console.log(bookApi);
-console.log(bookApi.getBooks());
-bookApi.init();
-console.log(bookApi.getBooks());
+
+console.log(authorApi);
+console.log(authorApi.getAuthors());
+authorApi.init();
+console.log(authorApi.getAuthors());
