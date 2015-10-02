@@ -1,0 +1,18 @@
+.slider img{
+  display:none;
+}
+.slider .prev{
+  display: inline-block;
+  background-color: blue;
+  height: 194px;
+  width: 30px;
+}
+.slider .next{
+  display: inline-block;
+  background-color: blue;
+  height: 194px;
+  width: 30px;
+}
+.slider .view{
+  display: inline-block !important;
+}

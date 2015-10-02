@@ -94,7 +94,7 @@
 	  		}else{
 	  		this.e.show();
 	  		}
-	  	}
+	  	},
 
 	  /*TODO: 4. Реализовать метод size(height, width)
 			который будет принимать два параметра
@@ -103,6 +103,32 @@
 			Если параметры не указаны, то возвращать текущие значения высоты и ширины объекта
 			Если параметры указаны, то меняем высоту и ширину элемента и возвращаем this
 		*/
+
+		size: function (height, width) {
+		  
+		  if (this.e) {
+			  var nheight, nwidth;
+			  if (height || width) {
+			  	if (height != undefined) {
+					  nheight = height;
+				  };
+				  if (width != undefined) {
+					  nwidth = width;
+				  };		  
+				  this.e.style.height = nheight;
+				  this.e.style.width = nwidth;
+			  } else {
+			  	return {
+			  		width: this.e.offsetWidth,
+			  		height: this.e.offsetHeight
+			  	};
+			  }
+			  
+		  } else {
+		  	showNodeElementError();
+		  }
+		  return this;
+		}		
 
 	  /*TODO: 5. Реализовать метод val()
 	  Который возвращает значение 'this.e.value' или меняет его в зависимости от того есть парамет или нет
